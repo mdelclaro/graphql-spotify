@@ -41,6 +41,7 @@ exports.callback = (req, res) => {
 
   request.post(authOptions, (err, response, body) => {
     const access_token = body.access_token;
-    res.redirect(frontend_uri + "?access_token=" + access_token);
+    res.json(access_token);
+    // res.redirect(frontend_uri + "?access_token=" + access_token);
   });
 };
