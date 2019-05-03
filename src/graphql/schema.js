@@ -79,11 +79,10 @@ module.exports = buildSchema(`
     href: String
     images: [Image]
     name: String
-    owner: User
+    owner: PublicUser
     uri: String
     tracks: [PlaylistTrack]
     public: Boolean
-    images: [Image]
   }
 
   type PlaylistTrack {
