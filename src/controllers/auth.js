@@ -7,6 +7,8 @@ const {
   frontend_uri
 } = require("../config");
 
+const SpotifyApi = require("../lib/client");
+
 exports.login = (req, res) => {
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
@@ -40,8 +42,9 @@ exports.callback = (req, res) => {
   };
 
   request.post(authOptions, (err, response, body) => {
-    const access_token = body.access_token;
-    res.json(access_token);
+    const { access_token, refresh_token, expires_in } = body;
+    SpotifyApi.init(access_token, refresh_token, expires_in);
+    res.send("You are now authenticaded and can use the GraphQL API.");
     // res.redirect(frontend_uri + "?access_token=" + access_token);
   });
 };

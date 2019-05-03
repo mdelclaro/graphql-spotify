@@ -2,8 +2,7 @@ const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
   type PrivateUser {
-    id: ID
-    birthday: String
+    id: String
     country: String
     display_name: String
     email: String
@@ -11,9 +10,6 @@ module.exports = buildSchema(`
     images: [Image]
     product: String
     uri: String
-    playlists: [Playlist]
-    top_artists: [Artist]
-    top_tracks: [Track]
   }
 
   type PublicUser {

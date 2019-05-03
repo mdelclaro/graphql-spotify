@@ -5,6 +5,7 @@ const graphqlHttp = require("express-graphql");
 const authRoutes = require("./src/routes/auth");
 const graphqlSchema = require("./src/graphql/schema");
 const graphqlResolver = require("./src/graphql/resolvers/resolvers");
+const userResolver = require("./src/graphql/resolvers/users");
 
 const app = express();
 
@@ -15,7 +16,7 @@ app.use(
   "/graphql",
   graphqlHttp({
     schema: graphqlSchema,
-    rootValue: graphqlResolver,
+    rootValue: userResolver,
     graphiql: true,
     pretty: true
   })

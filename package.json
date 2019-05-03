@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --timeout 5000"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,13 @@
     "express-graphql": "^0.8.0",
     "graphql": "^14.2.1",
     "querystring": "^0.2.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.0",
+    "sinon": "^7.3.2"
   }
 }
