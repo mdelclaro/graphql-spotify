@@ -7,7 +7,7 @@ module.exports = buildSchema(`
   }
 
   type RootQuery {
-    hello: TestData!
+    login(): 
   }
 
   schema {

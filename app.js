@@ -1,19 +1,45 @@
 const express = require("express");
+const cors = require("cors");
 const graphqlHttp = require("express-graphql");
+
+const authRoutes = require("./src/routes/auth");
 
 const app = express();
 
-const graphqlSchema = require("./src/graphql/schema");
-const graphqlResolver = require("./src/graphql/resolvers");
+app.use(cors());
 
-app.use(
-  "/graphql",
-  graphqlHttp({
-    schema: graphqlSchema,
-    rootValue: graphqlResolver,
-    graphiql: true
-  })
+app.use("/", authRoutes);
+
+// error handling
+app.use((error, req, res, next) => {
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message, data });
+});
+
+// Route not found
+app.use((req, res) => {
+  res.status(404).send("Invalid URL");
+});
+
+// const graphqlSchema = require("./src/graphql/schema");
+// const graphqlResolver = require("./src/graphql/resolvers");
+
+// app.use(
+//   "/graphql",
+//   graphqlHttp({
+//     schema: graphqlSchema,
+//     rootValue: graphqlResolver,
+//     graphiql: true,
+//     pretty: true
+//   })
+// );
+
+const port = process.env.PORT || 8888;
+
+console.log(
+  `Listening on port ${port}. Go /login to initiate authentication flow.`
 );
 
-app.listen(8080);
-console.log("Listening...");
+app.listen(port);
