@@ -9,18 +9,22 @@ module.exports = {
         api = SpotifyApi.getApi();
         return api.getMe((err, data) => {
           if (err) reject(err.message);
+          resolve(data.body);
+        });
+      });
+    } catch (err) {
+      console.log(err);
+      return err.message;
+    }
+  },
 
-          const user = {
-            id: data.body.id,
-            country: data.body.country,
-            display_name: data.body.display_name,
-            email: data.body.email,
-            href: data.body.href,
-            images: data.body.images,
-            product: data.body.product,
-            uri: data.body.uri
-          };
-          resolve(user);
+  user: args => {
+    try {
+      return new Promise((resolve, reject) => {
+        api = SpotifyApi.getApi();
+        return api.getUser(args.id, (err, data) => {
+          if (err) reject(err.message);
+          resolve(data.body);
         });
       });
     } catch (err) {
