@@ -2,7 +2,9 @@
 
 ## Auth
 
-In order to retrieve the auth data, go to `http://server:port/login` and perform the OAuth login.
+In order to retrieve the auth data, go to `http://<server>:<port>/login` and perform the OAuth login.
+
+Add the access_token to the header. Example: `"Authorization": "Bearer <access_token>"`
 
 ## Types
 
@@ -122,7 +124,7 @@ type RootQuery {
 
 ### User
 
-```javascript
+```js
 // Get current user
 query {
   me {
@@ -131,14 +133,25 @@ query {
   }
 }
 
-// Get current user's playlist
+// Get user by ID
+query {
+  user(userId: "12144136536") {
+    id
+  }
+}
+```
+
+### Playlist
+
+```js
+// Get current user's playlists
 query {
   myPlaylists {
     name
   }
 }
 
-// Get a user's playlist
+// Get a user's playlists
 query {
   userPlaylists(userId: "12144136536") {
     name
