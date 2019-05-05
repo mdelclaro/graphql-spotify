@@ -104,7 +104,7 @@ module.exports = buildSchema(`
     albums(ids: String!): [Album]
     playlist(id: String!): Playlist
     userPlaylists(userId: String!): [Playlist]
-    myPlaylists(userId: String!): [Playlist]
+    myPlaylists: [Playlist]
   }
 
   schema {
