@@ -11,6 +11,6 @@ module.exports = (req, res, next) => {
   }
 
   req.isAuth = true;
-  req.access_token = token;
+  req.token = token;
   next();
 };

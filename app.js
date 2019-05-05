@@ -3,15 +3,20 @@ const cors = require("cors");
 const graphqlHttp = require("express-graphql");
 
 const authRoutes = require("./src/routes/auth");
-const graphqlSchema = require("./src/graphql/schema");
-const graphqlResolver = require("./src/graphql/resolvers/resolvers");
-const userResolver = require("./src/graphql/resolvers/users");
+const graphqlSchema = require("./src/graphql/schemas");
+const userResolver = require("./src/graphql/resolvers/user");
+const auth = require("./src/middlewares/auth");
 
 const app = express();
 
 app.use(cors());
 
+// Auth routes
 app.use("/", authRoutes);
+
+// Auth middleware
+app.use(auth);
+
 app.use(
   "/graphql",
   graphqlHttp({
@@ -38,7 +43,7 @@ app.use((req, res) => {
 const port = process.env.PORT || 8888;
 
 console.log(
-  `Listening on port ${port}. Go /login to initiate authentication flow.`
+  `Listening on port ${port}. Go to /login to initiate authentication flow.`
 );
 
 app.listen(port);
