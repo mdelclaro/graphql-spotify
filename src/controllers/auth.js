@@ -44,7 +44,10 @@ exports.callback = (req, res) => {
   request.post(authOptions, (err, response, body) => {
     const { access_token, refresh_token, expires_in } = body;
     SpotifyApi.init(access_token, refresh_token, expires_in);
-    res.send("You are now authenticaded and can use the GraphQL API.");
+    res.json({
+      body
+    });
+    // res.send("You are now authenticaded and can use the GraphQL API.");
     // res.redirect(frontend_uri + "?access_token=" + access_token);
   });
 };

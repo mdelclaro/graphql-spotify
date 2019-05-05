@@ -1,13 +1,11 @@
 const SpotifyApi = require("../../lib/client");
 
-let api;
-
 module.exports = {
   me: () => {
     try {
       return new Promise((resolve, reject) => {
-        api = SpotifyApi.getApi();
-        return api.getMe((err, data) => {
+        let api = SpotifyApi.getApi();
+        api.getMe((err, data) => {
           if (err) reject(err.message);
           resolve(data.body);
         });
@@ -21,8 +19,8 @@ module.exports = {
   user: args => {
     try {
       return new Promise((resolve, reject) => {
-        api = SpotifyApi.getApi();
-        return api.getUser(args.id, (err, data) => {
+        let api = SpotifyApi.getApi();
+        api.getUser(args.id, (err, data) => {
           if (err) reject(err.message);
           resolve(data.body);
         });

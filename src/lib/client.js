@@ -7,20 +7,17 @@ const {
 } = require("../config");
 
 let SpotifyApi;
-let expiryDate;
 
 module.exports = {
-  init: (accessToken, refreshToken, expiresIn) => {
+  init: () => {
     const credentials = {
       clientId: spotify_client_id,
       clientSecret: spotify_client_secret,
-      redirectUri: redirect_uri,
-      accessToken,
-      refreshToken
+      redirectUri: redirect_uri
     };
     SpotifyApi = new SpotifyWebApi(credentials);
-    expiryDate = new Date();
-    expiryDate.setSeconds(expiryDate.getSeconds() + expiresIn);
+    // expiryDate = new Date();
+    // expiryDate.setSeconds(expiryDate.getSeconds() + expiresIn);
     return SpotifyApi;
   },
   getApi: () => {
@@ -46,8 +43,5 @@ module.exports = {
         }
       });
     });
-  },
-  getExpiryDate: () => {
-    return expiryDate;
   }
 };
