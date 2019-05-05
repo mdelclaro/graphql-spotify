@@ -115,7 +115,7 @@ type RootQuery {
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist
-  userPlaylists(userId: String!): [Playlist]
+  userPlaylists(id: String!): [Playlist]
   myPlaylists: [Playlist]
 }
 ```
@@ -135,7 +135,7 @@ query {
 
 // Get user by ID
 query {
-  user(userId: "12144136536") {
+  user(id: "12144136536") {
     id
   }
 }
@@ -153,7 +153,7 @@ query {
 
 // Get a user's playlists
 query {
-  userPlaylists(userId: "12144136536") {
+  userPlaylists(id: "12144136536") {
     name
   }
 }
