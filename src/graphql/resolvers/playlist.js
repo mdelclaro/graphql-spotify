@@ -24,7 +24,7 @@ module.exports = {
         playlists.push(item);
       });
 
-      resolve(playlists);
+      return playlists;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -40,20 +40,20 @@ module.exports = {
       }
 
       const options = {
-        url: spotify_base_url + "/users/" + args.userId + "/playlists",
+        url: spotify_base_url + "/users/" + args.id + "/playlists",
         headers: {
           Authorization: "Bearer " + req.token
         }
       };
 
-      const result = await request.get(options);
+      const result = await request(options);
       let playlists = [];
 
       result.items.map(item => {
         playlists.push(item);
       });
 
-      resolve(playlists);
+      return playlists;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -75,9 +75,8 @@ module.exports = {
         }
       };
 
-      const result = await request.get(options);
-
-      resolve(result);
+      const result = await request(options);
+      return result;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
