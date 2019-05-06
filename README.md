@@ -1,5 +1,9 @@
 # Spotify GraphQL API
+This project wraps the Spotify's Web API with a GraphQL API. To see more details about the API, such as request parameters etc, visit its [reference](https://developer.spotify.com/documentation/web-api/reference/).
 
+Feel free to contribute and implement missing methods or give any suggestion!
+
+# The API
 ## Auth
 
 In order to retrieve the auth data, go to `http://<server>:<port>/login` and perform the OAuth login. The response: 
@@ -154,6 +158,7 @@ type RootQuery {
   artist(id: String, name: String): Artist
   artists(ids: String!): [Artist]
   artistTopTracks(id: String!, country: String!): [Track]
+  artistAlbums()
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist
@@ -204,14 +209,14 @@ query {
 ### Track
 ```js
 // Get a track
-{
+query {
   track(id:"7JSHs5GH7pq5moVo8wu1I6") {
     name 
   }
 }
 
 // Get several tracks
-{
+query {
   tracks(ids:"7JSHs5GH7pq5moVo8wu1I6,119c93MHjrDLJTApCVGpvx") {
     name 
   }
@@ -222,13 +227,13 @@ query {
 ### Artist
 ```js
 // Get an artist
-{
+query {
   artist(id: "34EP7KEpOjXcM2TCat1ISk") {
     name
   }
 }
 // Get several artists
-{
+query {
   artists(ids: "34EP7KEpOjXcM2TCat1ISk,03r4iKL2g2442PT9n2UKsx") {
     name
     genres
@@ -236,8 +241,15 @@ query {
 }
 
 // Get an artist's top tracks
-{
+query {
   artistTopTracks(id: "6P7H3ai06vU1sGvdpBwDmE", country: "BR") {
+    name
+  }
+}
+
+// Get an artist's albums
+query {
+  artistAlbums(id: "6P7H3ai06vU1sGvdpBwDmE", market: "BR", include_groups:"album") {
     name
   }
 }
