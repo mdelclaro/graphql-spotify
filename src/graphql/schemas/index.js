@@ -114,7 +114,7 @@ module.exports = buildSchema(`
   type RootQuery {
     me: PrivateUser
     user(id: String!): PublicUser
-    track(id: String, name: String): Track
+    track(id: String!): Track
     tracks(ids: String!): [Track]
     artist(id: String, name: String): Artist
     artists(ids: String!): [Artist]
