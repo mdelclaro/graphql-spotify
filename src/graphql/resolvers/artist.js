@@ -68,9 +68,36 @@ module.exports = {
       };
 
       const result = await request(options);
-      const artists = result.tracks;
+      const topTracks = result.tracks;
 
-      return artists;
+      return topTracks;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
+  },
+
+  artistAlbums: async (args, req) => {
+    try {
+      if (!req.isAuth) {
+        throw new Error(
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
+        );
+      }
+
+      const options = {
+        url: `${spotify_base_url}/artists/${args.id}/albums?market=${
+          args.market
+        }&include_groups=${args.include_groups}`,
+        headers: {
+          Authorization: "Bearer " + req.token
+        }
+      };
+
+      const result = await request(options);
+      const albums = result.items;
+
+      return albums;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
