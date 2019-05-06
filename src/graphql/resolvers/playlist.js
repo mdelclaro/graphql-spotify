@@ -18,9 +18,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const playlists = result.items;
-
-      return playlists;
+      return result.items;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -43,9 +41,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const playlists = result.items;
-
-      return playlists;
+      return result.items;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);

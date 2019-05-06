@@ -41,9 +41,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const artists = result.artists;
-
-      return artists;
+      return result.artists;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -68,9 +66,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const topTracks = result.tracks;
-
-      return topTracks;
+      return result.tracks;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -95,9 +91,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const albums = result.items;
-
-      return albums;
+      return result.items;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -120,9 +114,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const artists = result.artists;
-
-      return artists;
+      return result.artists;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);

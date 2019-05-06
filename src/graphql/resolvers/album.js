@@ -74,9 +74,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      const tracks = result.items;
-
-      return tracks;
+      return result.items;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
