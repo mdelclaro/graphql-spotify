@@ -112,9 +112,27 @@ type Playlist {
   public: Boolean
 }
 
+type Playlists {
+  id: ID
+  collaborative: Boolean
+  description: String
+  href: String
+  images: [Image]
+  name: String
+  owner: PublicUser
+  uri: String
+  tracks: PlaylistsTrack
+  public: Boolean
+}
+
+type PlaylistsTrack {
+  href: String
+  total: Int
+}
+
 type PlaylistTrack {
   added_at: String
-  added_by: PublicUser
+  added_by: String
   track: Track
 }
 
@@ -131,16 +149,16 @@ type Image {
 type RootQuery {
   me: PrivateUser
   user(id: String!): PublicUser
-  track(id: String, name: String): Track
+  track(id: String!): Track
   tracks(ids: String!): [Track]
   artist(id: String, name: String): Artist
   artists(ids: String!): [Artist]
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist
-  userPlaylists(id: String!): [Playlist]
-  myPlaylists: [Playlist]
-}
+  userPlaylists(id: String!): [Playlists]
+  myPlaylists: [Playlists]
+  }
 ```
 
 ## Queries examples
