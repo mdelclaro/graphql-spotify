@@ -76,6 +76,13 @@ module.exports = {
       };
 
       const result = await request(options);
+
+      let tracks = [];
+      result.tracks.items.map(item => {
+        tracks.push(item);
+      });
+      result.tracks = tracks;
+
       return result;
     } catch (err) {
       console.log(err);

@@ -81,9 +81,27 @@ module.exports = buildSchema(`
     public: Boolean
   }
 
+  type Playlists {
+    id: ID
+    collaborative: Boolean
+    description: String
+    href: String
+    images: [Image]
+    name: String
+    owner: PublicUser
+    uri: String
+    tracks: PlaylistsTrack
+    public: Boolean
+  }
+
+  type PlaylistsTrack {
+    href: String
+    total: Int
+  }
+
   type PlaylistTrack {
     added_at: String
-    added_by: PublicUser
+    added_by: String
     track: Track
   }
 
@@ -103,8 +121,8 @@ module.exports = buildSchema(`
     album(id: String!): Album
     albums(ids: String!): [Album]
     playlist(id: String!): Playlist
-    userPlaylists(id: String!): [Playlist]
-    myPlaylists: [Playlist]
+    userPlaylists(id: String!): [Playlists]
+    myPlaylists: [Playlists]
   }
 
   schema {

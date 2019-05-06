@@ -159,7 +159,7 @@ query {
 // Get user by ID
 query {
   user(id: "12144136536") {
-    id
+    display_name
   }
 }
 ```
