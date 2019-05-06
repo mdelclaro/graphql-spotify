@@ -2,9 +2,32 @@
 
 ## Auth
 
-In order to retrieve the auth data, go to `http://<server>:<port>/login` and perform the OAuth login.
+In order to retrieve the auth data, go to `http://<server>:<port>/login` and perform the OAuth login. The response: 
 
-Add the access_token to the header. Example: `"Authorization": "Bearer <access_token>"`
++ Response 200 (application/json)
+    + Attributes (object)
+        + access_token: `"xxx"` (string)
+        + refresh_token: `"xxx"` (string)
+        + token_type: `"Bearer"` (string)
+        + expires_in: `3600` (int)
+        + scope: `"user-read-email user-read-private"` (string)
+
+Add the access_token to the Authorization header of the requests. Example: `"Authorization": "Bearer <access_token>"`
+
+To refresh the token, perform a `POST` request on `http://<server>:<port>/refresh_token` with the `refresh_token` on the body:
+
++ Body (object)
+    + refresh_token: `"xxx"` (string)
+
++ Request (application/json)
+
++ Response 200 (application/json)
+    + Attributes (object)
+        + access_token: `"xxx"` (string)
+        + token_type: `"Bearer"` (string)
+        + expires_in: `3600` (int)
+        + scope: `"user-read-email user-read-private"` (string)
+
 
 ## Types
 

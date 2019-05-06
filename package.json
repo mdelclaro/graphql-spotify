@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mdelclaro/grapql-spotify#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "dotenv-safe": "^6.1.0",

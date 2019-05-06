@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const graphqlHttp = require("express-graphql");
 
 const authRoutes = require("./src/routes/auth");
@@ -10,6 +11,8 @@ const auth = require("./src/middlewares/auth");
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Auth routes
 app.use("/", authRoutes);

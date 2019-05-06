@@ -6,7 +6,7 @@ module.exports = {
     try {
       if (!req.isAuth) {
         throw new Error(
-          "This endpoint requires authentication. Go to /signin to authenticate."
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
         );
       }
 
@@ -35,7 +35,7 @@ module.exports = {
     try {
       if (!req.isAuth) {
         throw new Error(
-          "This endpoint requires authentication. Go to /signin to authenticate."
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
         );
       }
 
@@ -64,7 +64,7 @@ module.exports = {
     try {
       if (!req.isAuth) {
         throw new Error(
-          "This endpoint requires authentication. Go to /signin to authenticate."
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
         );
       }
 

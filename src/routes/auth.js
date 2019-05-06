@@ -7,4 +7,6 @@ router.get("/login", authController.login);
 
 router.get("/callback", authController.callback);
 
+router.post("/refresh_token", authController.refresh);
+
 module.exports = router;

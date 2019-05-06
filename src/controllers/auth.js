@@ -48,3 +48,29 @@ exports.callback = (req, res) => {
     // res.redirect(frontend_uri + "?access_token=" + access_token);
   });
 };
+
+exports.refresh = (req, res) => {
+  const authOptions = {
+    url: "https://accounts.spotify.com/api/token",
+    form: {
+      refresh_token: req.body.refresh_token,
+      grant_type: "refresh_token"
+    },
+    headers: {
+      Authorization:
+        "Basic " +
+        Buffer.from(spotify_client_id + ":" + spotify_client_secret).toString(
+          "base64"
+        )
+    },
+    json: true,
+    followAllRedirects: true
+  };
+
+  request.post(authOptions, (err, response, body) => {
+    if (err) res.json({ Error: err });
+    res.json({
+      body
+    });
+  });
+};
