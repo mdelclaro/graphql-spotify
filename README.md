@@ -174,7 +174,7 @@ query {
   }
 }
 
-// Get a user's playlists
+// Get an user's playlists
 query {
   userPlaylists(id: "12144136536") {
     name
