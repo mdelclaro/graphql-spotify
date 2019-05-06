@@ -199,3 +199,39 @@ query {
   }
 }
 ```
+
+### Track
+```js
+// Get a track
+{
+  track(id:"7JSHs5GH7pq5moVo8wu1I6") {
+    name 
+  }
+}
+
+// Get several tracks
+{
+  tracks(ids:"7JSHs5GH7pq5moVo8wu1I6,119c93MHjrDLJTApCVGpvx") {
+    name 
+  }
+}
+
+```
+
+### Artist
+```js
+// Get an artist
+{
+  artist(id: "34EP7KEpOjXcM2TCat1ISk") {
+    name
+  }
+}
+// Get several artists
+{
+  artists(ids: "34EP7KEpOjXcM2TCat1ISk,03r4iKL2g2442PT9n2UKsx") {
+    name
+    genres
+  }
+}
+
+```

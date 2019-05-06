@@ -116,7 +116,7 @@ module.exports = buildSchema(`
     user(id: String!): PublicUser
     track(id: String!): Track
     tracks(ids: String!): [Track]
-    artist(id: String, name: String): Artist
+    artist(id: String!): Artist
     artists(ids: String!): [Artist]
     album(id: String!): Album
     albums(ids: String!): [Album]
