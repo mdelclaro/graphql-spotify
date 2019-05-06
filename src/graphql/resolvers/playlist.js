@@ -18,11 +18,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      let playlists = [];
-
-      result.items.map(item => {
-        playlists.push(item);
-      });
+      const playlists = result.items;
 
       return playlists;
     } catch (err) {
@@ -47,11 +43,7 @@ module.exports = {
       };
 
       const result = await request(options);
-      let playlists = [];
-
-      result.items.map(item => {
-        playlists.push(item);
-      });
+      const playlists = result.items;
 
       return playlists;
     } catch (err) {

@@ -51,8 +51,6 @@ module.exports = {
         albums.push(album);
       });
 
-      console.log(albums);
-
       return albums;
     } catch (err) {
       console.log(err);

@@ -41,11 +41,7 @@ module.exports = {
       };
 
       const result = await request(options);
-
-      let artists = [];
-      result.artists.map(artist => {
-        artists.push(artist);
-      });
+      const artists = result.artists;
 
       return artists;
     } catch (err) {
