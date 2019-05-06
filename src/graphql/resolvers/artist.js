@@ -17,8 +17,8 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
-      return result;
+      const artist = await request(options);
+      return artist;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);

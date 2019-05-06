@@ -17,11 +17,11 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const album = await request(options);
 
-      result.tracks = result.tracks.items;
+      album.tracks = album.tracks.items;
 
-      return result;
+      return album;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);

@@ -17,8 +17,8 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
-      return result;
+      const me = await request(options);
+      return me;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
@@ -40,8 +40,8 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
-      return result;
+      const user = await request(options);
+      return user;
     } catch (err) {
       console.log(err);
       return err.message;
