@@ -46,5 +46,36 @@ module.exports = {
       console.log(err);
       return err.message;
     }
+  },
+
+  myTop: async (args, req) => {
+    try {
+      if (!req.isAuth) {
+        throw new Error(
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
+        );
+      }
+
+      const options = {
+        url: `${spotify_base_url}/me/top/${args.type}?time_range=${
+          args.time_range
+        }`,
+        headers: {
+          Authorization: "Bearer " + req.token
+        }
+      };
+
+      const result = await request(options);
+
+      let myTop;
+
+      if (args.type === "artists") myTop = { artists: result.items };
+      if (args.type === "tracks") myTop = { tracks: result.items };
+
+      return myTop;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
   }
 };

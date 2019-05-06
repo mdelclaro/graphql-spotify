@@ -145,6 +145,11 @@ type Image {
   url: String
   width: Int
 }
+
+type MyTop {
+  artists: [Artist]
+  tracks: [Track]
+}
 ```
 
 ## Queries
@@ -153,6 +158,7 @@ type Image {
 type RootQuery {
   me: PrivateUser
   user(id: String!): PublicUser
+  myTop(type: String!, time_range: String): MyTop
   track(id: String!): Track
   tracks(ids: String!): [Track]
   artist(id: String, name: String): Artist
@@ -165,7 +171,7 @@ type RootQuery {
   playlist(id: String!): Playlist
   userPlaylists(id: String!): [Playlists]
   myPlaylists: [Playlists]
-  }
+}
 ```
 
 ## Queries examples
@@ -185,6 +191,13 @@ query {
 query {
   user(id: "12144136536") {
     display_name
+  }
+}
+
+// Get my top tracks/artists
+query {
+  myTop(type:"artists", time_range:"short_term") {
+    artists { name }
   }
 }
 ```

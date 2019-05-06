@@ -117,9 +117,15 @@ module.exports = buildSchema(`
     total: Int
   }
 
+  type MyTop {
+    artists: [Artist]
+    tracks: [Track]
+  }
+
   type RootQuery {
     me: PrivateUser
     user(id: String!): PublicUser
+    myTop(type: String!, time_range: String): MyTop
     track(id: String!): Track
     tracks(ids: String!): [Track]
     artist(id: String!): Artist

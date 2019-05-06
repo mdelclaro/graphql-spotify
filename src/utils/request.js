@@ -7,6 +7,10 @@ module.exports = options => {
         reject(new Error(error));
       }
 
+      if (!response.statusCode) {
+        reject(new Error("Error " + response.statusCode));
+      }
+
       result = JSON.parse(body);
       if (result.error) {
         reject(result.error);
