@@ -14,7 +14,7 @@ In order to retrieve the auth data, go to `http://<server>:<port>/login` and per
         + refresh_token: `"xxx"` (string)
         + token_type: `"Bearer"` (string)
         + expires_in: `3600` (int)
-        + scope: `"user-read-email user-read-private"` (string)
+        + scope: `"user-read-email user-read-private user-top-read"` (string)
 
 Add the access_token to the Authorization header of the requests. Example: `"Authorization": "Bearer <access_token>"`
 
@@ -30,7 +30,7 @@ To refresh the token, perform a `POST` request on `http://<server>:<port>/refres
         + access_token: `"xxx"` (string)
         + token_type: `"Bearer"` (string)
         + expires_in: `3600` (int)
-        + scope: `"user-read-email user-read-private"` (string)
+        + scope: `"user-read-email user-read-private user-top-read"` (string)
 
 
 ## Types
