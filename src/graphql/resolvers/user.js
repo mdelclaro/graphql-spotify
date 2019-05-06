@@ -4,12 +4,6 @@ const request = require("../../utils/request");
 module.exports = {
   me: async (_, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/me",
         headers: {
@@ -17,7 +11,7 @@ module.exports = {
         }
       };
 
-      const me = await request(options);
+      const me = await request(req, options);
       return me;
     } catch (err) {
       console.log(err);
@@ -27,12 +21,6 @@ module.exports = {
 
   user: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/users/" + args.id,
         headers: {
@@ -40,7 +28,7 @@ module.exports = {
         }
       };
 
-      const user = await request(options);
+      const user = await request(req, options);
       return user;
     } catch (err) {
       console.log(err);
@@ -50,12 +38,6 @@ module.exports = {
 
   myTopTracks: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: `${spotify_base_url}/me/top/tracks?time_range=${args.time_range}`,
         headers: {
@@ -63,7 +45,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);
@@ -73,12 +55,6 @@ module.exports = {
 
   myTopArtists: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: `${spotify_base_url}/me/top/artists?time_range=${args.time_range}`,
         headers: {
@@ -86,7 +62,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);

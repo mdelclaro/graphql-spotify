@@ -4,12 +4,6 @@ const request = require("../../utils/request");
 module.exports = {
   myPlaylists: async (_, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/me/playlists",
         headers: {
@@ -17,7 +11,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);
@@ -27,12 +21,6 @@ module.exports = {
 
   userPlaylists: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/users/" + args.id + "/playlists",
         headers: {
@@ -40,7 +28,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);
@@ -50,12 +38,6 @@ module.exports = {
 
   playlist: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/playlists/" + args.id,
         headers: {
@@ -63,7 +45,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
 
       let tracks = [];
       result.tracks.items.map(item => {

@@ -4,12 +4,6 @@ const request = require("../../utils/request");
 module.exports = {
   album: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/albums/" + args.id,
         headers: {
@@ -17,7 +11,7 @@ module.exports = {
         }
       };
 
-      const album = await request(options);
+      const album = await request(req, options);
 
       album.tracks = album.tracks.items;
 
@@ -30,12 +24,6 @@ module.exports = {
 
   albums: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/albums/?ids=" + args.ids,
         headers: {
@@ -43,7 +31,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
 
       let albums = [];
       result.albums.map(album => {
@@ -60,12 +48,6 @@ module.exports = {
 
   albumTracks: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/albums/" + args.id + "/tracks",
         headers: {
@@ -73,7 +55,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);

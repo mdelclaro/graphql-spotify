@@ -4,12 +4,6 @@ const request = require("../../utils/request");
 module.exports = {
   artist: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/artists/" + args.id,
         headers: {
@@ -17,7 +11,7 @@ module.exports = {
         }
       };
 
-      const artist = await request(options);
+      const artist = await request(req, options);
       return artist;
     } catch (err) {
       console.log(err);
@@ -27,12 +21,6 @@ module.exports = {
 
   artists: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/artists/?ids=" + args.ids,
         headers: {
@@ -40,7 +28,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.artists;
     } catch (err) {
       console.log(err);
@@ -50,12 +38,6 @@ module.exports = {
 
   artistTopTracks: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: `${spotify_base_url}/artists/${args.id}/top-tracks?country=${
           args.country
@@ -65,7 +47,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.tracks;
     } catch (err) {
       console.log(err);
@@ -75,12 +57,6 @@ module.exports = {
 
   artistAlbums: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: `${spotify_base_url}/artists/${args.id}/albums?market=${
           args.market
@@ -90,7 +66,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.items;
     } catch (err) {
       console.log(err);
@@ -100,12 +76,6 @@ module.exports = {
 
   artistRelated: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/artists/" + args.id + "/related-artists",
         headers: {
@@ -113,7 +83,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.artists;
     } catch (err) {
       console.log(err);

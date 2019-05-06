@@ -4,12 +4,6 @@ const request = require("../../utils/request");
 module.exports = {
   track: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/tracks/" + args.id,
         headers: {
@@ -17,7 +11,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result;
     } catch (err) {
       console.log(err);
@@ -27,12 +21,6 @@ module.exports = {
 
   tracks: async (args, req) => {
     try {
-      if (!req.isAuth) {
-        throw new Error(
-          "This endpoint requires authentication. Go to /signin to retrieve an access token."
-        );
-      }
-
       const options = {
         url: spotify_base_url + "/tracks/?ids=" + args.ids,
         headers: {
@@ -40,7 +28,7 @@ module.exports = {
         }
       };
 
-      const result = await request(options);
+      const result = await request(req, options);
       return result.tracks;
     } catch (err) {
       console.log(err);
