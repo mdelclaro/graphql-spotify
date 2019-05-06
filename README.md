@@ -158,7 +158,7 @@ type RootQuery {
   artist(id: String, name: String): Artist
   artists(ids: String!): [Artist]
   artistTopTracks(id: String!, country: String!): [Track]
-  artistAlbums()
+  artistAlbums(id: String!, market: String, include_groups: String): [Album]
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist

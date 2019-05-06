@@ -122,6 +122,7 @@ module.exports = buildSchema(`
     artistAlbums(id: String!, market: String, include_groups: String): [Album]
     album(id: String!): Album
     albums(ids: String!): [Album]
+    albumTracks(id: String!): [Track]
     playlist(id: String!): Playlist
     userPlaylists(id: String!): [Playlists]
     myPlaylists: [Playlists]
