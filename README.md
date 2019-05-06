@@ -159,6 +159,7 @@ type RootQuery {
   artists(ids: String!): [Artist]
   artistTopTracks(id: String!, country: String!): [Track]
   artistAlbums(id: String!, market: String, include_groups: String): [Album]
+  artistRelated(id: String!): [Artist]
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist
@@ -253,5 +254,13 @@ query {
     name
   }
 }
+
+// Get artist's related artists
+query {
+  artistRelated(id: "6P7H3ai06vU1sGvdpBwDmE") {
+    name
+  }
+}
+
 
 ```
