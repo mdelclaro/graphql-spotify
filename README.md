@@ -146,9 +146,12 @@ type Image {
   width: Int
 }
 
-type MyTop {
-  artists: [Artist]
+type MyTopTracks {
   tracks: [Track]
+}
+
+type MyTopArtists {
+  artists: [Artist]
 }
 ```
 
@@ -158,7 +161,8 @@ type MyTop {
 type RootQuery {
   me: PrivateUser
   user(id: String!): PublicUser
-  myTop(type: String!, time_range: String): MyTop
+  myTopTracks(time_range: String): MyTopTracks
+  myTopArtists(time_range: String): MyTopArtists
   track(id: String!): Track
   tracks(ids: String!): [Track]
   artist(id: String, name: String): Artist
@@ -196,7 +200,7 @@ query {
 
 // Get my top tracks/artists
 query {
-  myTop(type:"artists", time_range:"short_term") {
+  myTopArtists(, time_range:"short_term") {
     artists { name }
   }
 }

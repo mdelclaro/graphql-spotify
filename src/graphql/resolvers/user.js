@@ -48,7 +48,7 @@ module.exports = {
     }
   },
 
-  myTop: async (args, req) => {
+  myTopTracks: async (args, req) => {
     try {
       if (!req.isAuth) {
         throw new Error(
@@ -57,22 +57,37 @@ module.exports = {
       }
 
       const options = {
-        url: `${spotify_base_url}/me/top/${args.type}?time_range=${
-          args.time_range
-        }`,
+        url: `${spotify_base_url}/me/top/tracks?time_range=${args.time_range}`,
         headers: {
           Authorization: "Bearer " + req.token
         }
       };
 
       const result = await request(options);
+      return result.items;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
+  },
 
-      let myTop;
+  myTopArtists: async (args, req) => {
+    try {
+      if (!req.isAuth) {
+        throw new Error(
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
+        );
+      }
 
-      if (args.type === "artists") myTop = { artists: result.items };
-      if (args.type === "tracks") myTop = { tracks: result.items };
+      const options = {
+        url: `${spotify_base_url}/me/top/artists?time_range=${args.time_range}`,
+        headers: {
+          Authorization: "Bearer " + req.token
+        }
+      };
 
-      return myTop;
+      const result = await request(options);
+      return result.items;
     } catch (err) {
       console.log(err);
       throw new Error(err.message);
