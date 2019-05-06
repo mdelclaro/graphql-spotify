@@ -118,6 +118,7 @@ module.exports = buildSchema(`
     tracks(ids: String!): [Track]
     artist(id: String!): Artist
     artists(ids: String!): [Artist]
+    artistTopTracks(id: String!, country: String!): [Track]
     album(id: String!): Album
     albums(ids: String!): [Album]
     playlist(id: String!): Playlist

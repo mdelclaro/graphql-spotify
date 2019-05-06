@@ -153,6 +153,7 @@ type RootQuery {
   tracks(ids: String!): [Track]
   artist(id: String, name: String): Artist
   artists(ids: String!): [Artist]
+  artistTopTracks(id: String!, country: String!): [Track]
   album(id: String!): Album
   albums(ids: String!): [Album]
   playlist(id: String!): Playlist
@@ -231,6 +232,13 @@ query {
   artists(ids: "34EP7KEpOjXcM2TCat1ISk,03r4iKL2g2442PT9n2UKsx") {
     name
     genres
+  }
+}
+
+// Get an artist's top tracks
+{
+  artistTopTracks(id: "6P7H3ai06vU1sGvdpBwDmE", country: "BR") {
+    name
   }
 }
 

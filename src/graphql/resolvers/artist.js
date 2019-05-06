@@ -48,5 +48,32 @@ module.exports = {
       console.log(err);
       throw new Error(err.message);
     }
+  },
+
+  artistTopTracks: async (args, req) => {
+    try {
+      if (!req.isAuth) {
+        throw new Error(
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
+        );
+      }
+
+      const options = {
+        url: `${spotify_base_url}/artists/${args.id}/top-tracks?country=${
+          args.country
+        }`,
+        headers: {
+          Authorization: "Bearer " + req.token
+        }
+      };
+
+      const result = await request(options);
+      const artists = result.tracks;
+
+      return artists;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
   }
 };
