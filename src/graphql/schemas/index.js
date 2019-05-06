@@ -66,6 +66,7 @@ module.exports = buildSchema(`
     popularity: Int
     type: String
     uri: String
+    followers: Followers
   }
 
   type Playlist {
@@ -111,6 +112,11 @@ module.exports = buildSchema(`
     width: Int
   }
 
+  type Followers {
+    href: String
+    total: Int
+  }
+
   type RootQuery {
     me: PrivateUser
     user(id: String!): PublicUser
@@ -120,6 +126,7 @@ module.exports = buildSchema(`
     artists(ids: String!): [Artist]
     artistTopTracks(id: String!, country: String!): [Track]
     artistAlbums(id: String!, market: String, include_groups: String): [Album]
+    artistRelated(id: String!): [Artist]
     album(id: String!): Album
     albums(ids: String!): [Album]
     albumTracks(id: String!): [Track]

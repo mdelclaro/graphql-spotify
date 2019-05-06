@@ -102,5 +102,30 @@ module.exports = {
       console.log(err);
       throw new Error(err.message);
     }
+  },
+
+  artistRelated: async (args, req) => {
+    try {
+      if (!req.isAuth) {
+        throw new Error(
+          "This endpoint requires authentication. Go to /signin to retrieve an access token."
+        );
+      }
+
+      const options = {
+        url: spotify_base_url + "/artists/" + args.id + "/related-artists",
+        headers: {
+          Authorization: "Bearer " + req.token
+        }
+      };
+
+      const result = await request(options);
+      const artists = result.artists;
+
+      return artists;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
   }
 };
