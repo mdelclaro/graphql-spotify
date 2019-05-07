@@ -32,7 +32,7 @@ To refresh the token, perform a `POST` request on `http://<server>:<port>/refres
         + expires_in: `3600` (int)
         + scope: `"user-read-email user-read-private user-top-read"` (string)
 
-
+# Reference
 ## Types
 
 ```js
@@ -153,6 +153,24 @@ type MyTopTracks {
 type MyTopArtists {
   artists: [Artist]
 }
+
+type SnapshotID {
+  snapshot_id: String
+}
+
+input PlaylistInput {
+  user_id: String!
+  name: String!
+  public: Boolean
+  collaborative: Boolean
+  description: String
+}
+
+input AddTracksInput {
+  playlist_id: String!
+  uris: [String]
+  position: Int
+}
 ```
 
 ## Queries
@@ -178,106 +196,144 @@ type RootQuery {
 }
 ```
 
-## Queries examples
+### Queries examples:
 
-### User
+* #### User
+
+  ```js
+  // Get current user
+  query {
+    me {
+      id
+      display_name
+    }
+  }
+
+  // Get user by ID
+  query {
+    user(id: "12144136536") {
+      display_name
+    }
+  }
+
+  // Get my top tracks/artists
+  query {
+    myTopArtists(, time_range:"short_term") {
+      artists { name }
+    }
+  }
+  ```
+
+* #### Playlist
+
+  ```js
+  // Get current user's playlists
+  query {
+    myPlaylists {
+      name
+    }
+  }
+
+  // Get an user's playlists
+  query {
+    userPlaylists(id: "12144136536") {
+      name
+    }
+  }
+  ```
+
+* #### Track
+  ```js
+  // Get a track
+  query {
+    track(id:"7JSHs5GH7pq5moVo8wu1I6") {
+      name 
+    }
+  }
+
+  // Get several tracks
+  query {
+    tracks(ids:"7JSHs5GH7pq5moVo8wu1I6,119c93MHjrDLJTApCVGpvx") {
+      name 
+    }
+  }
+
+  ```
+
+* #### Artist
+  ```js
+  // Get an artist
+  query {
+    artist(id: "34EP7KEpOjXcM2TCat1ISk") {
+      name
+    }
+  }
+  // Get several artists
+  query {
+    artists(ids: "34EP7KEpOjXcM2TCat1ISk,03r4iKL2g2442PT9n2UKsx") {
+      name
+      genres
+    }
+  }
+
+  // Get an artist's top tracks
+  query {
+    artistTopTracks(id: "6P7H3ai06vU1sGvdpBwDmE", country: "BR") {
+      name
+    }
+  }
+
+  // Get an artist's albums
+  query {
+    artistAlbums(id: "6P7H3ai06vU1sGvdpBwDmE", market: "BR", include_groups:"album") {
+      name
+    }
+  }
+
+  // Get artist's related artists
+  query {
+    artistRelated(id: "6P7H3ai06vU1sGvdpBwDmE") {
+      name
+    }
+  }
+  ```
+
+## Mutations
 
 ```js
-// Get current user
-query {
-  me {
-    id
-    display_name
-  }
-}
-
-// Get user by ID
-query {
-  user(id: "12144136536") {
-    display_name
-  }
-}
-
-// Get my top tracks/artists
-query {
-  myTopArtists(, time_range:"short_term") {
-    artists { name }
-  }
+type RootMutation {
+  createPlaylist(playlistInput: PlaylistInput): Playlist
+  addTracksToPlaylist(addTracksInput: AddTracksInput): SnapshotID
 }
 ```
 
-### Playlist
+### Mutations examples:
 
-```js
-// Get current user's playlists
-query {
-  myPlaylists {
-    name
+* #### Playlist
+  ```js
+  // Create a playlist
+  mutation {
+    createPlaylist(playlistInput: {
+      user_id: "12144136536", 
+      name: "Testing my GraphQL API :-)", 
+      public: true, 
+      collaborative: false, 
+      description: "This playlist was created using my GraphQL API!"
+    }) 
+    {
+      name
+    }
   }
-}
 
-// Get an user's playlists
-query {
-  userPlaylists(id: "12144136536") {
-    name
+  // Add tracks to a playlist
+  mutation {
+    addTracksToPlaylist(addTracksInput: {
+      playlist_id: "0nxsVUwXdMJIUN9WZdIo0D",
+      uris:["spotify:track:1XIPf6j2zWwIcpYNm8n9tn","spotify:track:62zWbVxRXQC1nRrssqvrbx","spotify:track:3KhF2YiNpJvGpfiCW45R6D","spotify:track:6QDbGdbJ57Mtkflsg42WV5"]
+    }) 
+    {
+      snapshot_id
+    }
   }
-}
-```
 
-### Track
-```js
-// Get a track
-query {
-  track(id:"7JSHs5GH7pq5moVo8wu1I6") {
-    name 
-  }
-}
-
-// Get several tracks
-query {
-  tracks(ids:"7JSHs5GH7pq5moVo8wu1I6,119c93MHjrDLJTApCVGpvx") {
-    name 
-  }
-}
-
-```
-
-### Artist
-```js
-// Get an artist
-query {
-  artist(id: "34EP7KEpOjXcM2TCat1ISk") {
-    name
-  }
-}
-// Get several artists
-query {
-  artists(ids: "34EP7KEpOjXcM2TCat1ISk,03r4iKL2g2442PT9n2UKsx") {
-    name
-    genres
-  }
-}
-
-// Get an artist's top tracks
-query {
-  artistTopTracks(id: "6P7H3ai06vU1sGvdpBwDmE", country: "BR") {
-    name
-  }
-}
-
-// Get an artist's albums
-query {
-  artistAlbums(id: "6P7H3ai06vU1sGvdpBwDmE", market: "BR", include_groups:"album") {
-    name
-  }
-}
-
-// Get artist's related artists
-query {
-  artistRelated(id: "6P7H3ai06vU1sGvdpBwDmE") {
-    name
-  }
-}
-
-
-```
+  ```
