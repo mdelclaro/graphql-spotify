@@ -139,7 +139,7 @@ module.exports = buildSchema(`
 
   input AddTracksInput {
     playlist_id: String!
-    uris: String
+    uris: [String]
     position: Int
   }
 
