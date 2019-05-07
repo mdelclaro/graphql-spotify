@@ -1,17 +1,9 @@
-const { spotify_base_url } = require("../../config");
-const request = require("../../utils/request");
+const { getRequest } = require("../../utils/request");
 
 module.exports = {
   myPlaylists: async (_, req) => {
     try {
-      const options = {
-        url: spotify_base_url + "/me/playlists",
-        headers: {
-          Authorization: "Bearer " + req.token
-        }
-      };
-
-      const result = await request(req, options);
+      const result = await getRequest(req, "/me/playlists");
       return result.items;
     } catch (err) {
       console.log(err);
@@ -21,14 +13,7 @@ module.exports = {
 
   userPlaylists: async (args, req) => {
     try {
-      const options = {
-        url: spotify_base_url + "/users/" + args.id + "/playlists",
-        headers: {
-          Authorization: "Bearer " + req.token
-        }
-      };
-
-      const result = await request(req, options);
+      const result = await getRequest(req, "/users/" + args.id + "/playlists");
       return result.items;
     } catch (err) {
       console.log(err);
@@ -38,14 +23,7 @@ module.exports = {
 
   playlist: async (args, req) => {
     try {
-      const options = {
-        url: spotify_base_url + "/playlists/" + args.id,
-        headers: {
-          Authorization: "Bearer " + req.token
-        }
-      };
-
-      const result = await request(req, options);
+      const result = await getRequest(req, "/playlists/" + args.id);
 
       let tracks = [];
       result.tracks.items.map(item => {
@@ -58,5 +36,7 @@ module.exports = {
       console.log(err);
       throw new Error(err.message);
     }
-  }
+  },
+
+  createPlaylist: async (args, req) => {}
 };

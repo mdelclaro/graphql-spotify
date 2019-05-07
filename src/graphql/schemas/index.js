@@ -120,9 +120,26 @@ module.exports = buildSchema(`
   type MyTopTracks {
     tracks: [Track]
   }
-  
+
   type MyTopArtists {
     artists: [Artist]
+  }
+
+  type SnapshotID {
+    snapshot_id: String
+  }
+
+  input PlaylistInput {
+    name: String!
+    public: Boolean
+    collaborative: Boolean
+    description: String
+  }
+
+  input AddTracksInput {
+    playlist_id: String!
+    uris: String
+    position: Int
   }
 
   type RootQuery {
@@ -145,7 +162,13 @@ module.exports = buildSchema(`
     myPlaylists: [Playlists]
   }
 
+  type RootMutation {
+    createPlaylist(playlistInput: PlaylistInput): Playlist
+    addTracksToPlaylist(addTracksInput: AddTracksInput): SnapshotID
+  }
+
   schema {
     query: RootQuery
+    mutation: RootMutation
   }
 `);

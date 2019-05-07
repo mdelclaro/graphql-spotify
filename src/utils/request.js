@@ -1,6 +1,7 @@
 const request = require("request");
+const { spotify_base_url } = require("../config/");
 
-module.exports = (req, options) => {
+exports.getRequest = (req, url) => {
   return new Promise((resolve, reject) => {
     if (!req.isAuth) {
       reject(
@@ -9,6 +10,13 @@ module.exports = (req, options) => {
         )
       );
     }
+
+    const options = {
+      url: spotify_base_url + url,
+      headers: {
+        Authorization: "Bearer " + req.token
+      }
+    };
 
     request.get(options, (error, response, body) => {
       if (error) {
@@ -28,3 +36,5 @@ module.exports = (req, options) => {
     });
   });
 };
+
+exports.postRequest = (req, options) => {};
