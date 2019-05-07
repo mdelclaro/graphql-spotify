@@ -1,4 +1,4 @@
-const { getRequest } = require("../../utils/request");
+const { getRequest, postRequest } = require("../../utils/request");
 
 module.exports = {
   myPlaylists: async (_, req) => {
@@ -38,5 +38,30 @@ module.exports = {
     }
   },
 
-  createPlaylist: async (args, req) => {}
+  createPlaylist: async (args, req) => {
+    try {
+      const { name, public, collaborative, description } = args.playlistInput;
+      const body = {
+        name,
+        public,
+        collaborative,
+        description
+      };
+      const url = `/users/${args.playlistInput.user_id}/playlists`;
+      const params = { body, url, json: true };
+
+      const result = await postRequest(req, params);
+
+      let tracks = [];
+      result.tracks.items.map(item => {
+        tracks.push(item);
+      });
+      result.tracks = tracks;
+
+      return result;
+    } catch (err) {
+      console.log(err);
+      throw new Error(err.message);
+    }
+  }
 };

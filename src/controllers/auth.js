@@ -13,7 +13,13 @@ exports.login = (req, res) => {
       querystring.stringify({
         response_type: "code",
         client_id: spotify_client_id,
-        scope: "user-read-private user-read-email user-top-read",
+        scope: `user-read-private 
+           user-read-email 
+           user-top-read 
+           playlist-modify-public 
+           playlist-modify-private 
+           playlist-read-private
+          `,
         redirect_uri
       })
   );

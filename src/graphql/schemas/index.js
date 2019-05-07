@@ -130,6 +130,7 @@ module.exports = buildSchema(`
   }
 
   input PlaylistInput {
+    user_id: String!
     name: String!
     public: Boolean
     collaborative: Boolean
