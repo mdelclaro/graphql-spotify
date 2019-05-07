@@ -3,7 +3,7 @@ This project wraps the Spotify's Web API with a GraphQL API. To see more details
 
 Feel free to contribute and implement missing methods or give any suggestion!
 
-# The API
+# API Reference
 ## Auth
 
 In order to retrieve the auth data, go to `http://<server>:<port>/login` and perform the OAuth login. The response: 
@@ -32,7 +32,6 @@ To refresh the token, perform a `POST` request on `http://<server>:<port>/refres
         + expires_in: `3600` (int)
         + scope: `"user-read-email user-read-private user-top-read"` (string)
 
-# Reference
 ## Types
 
 ```js
