@@ -1,7 +1,7 @@
 # Spotify GraphQL API
 This project wraps the Spotify's Web API with a GraphQL API. To see more details about the API, such as request parameters etc, visit its [reference](https://developer.spotify.com/documentation/web-api/reference/).
 
-Feel free to contribute and implement missing methods or give any suggestion!
+Feel free to contribute and also implement missing methods or give any suggestion!
 
 # API Reference
 ## Auth
